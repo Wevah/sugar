@@ -4,14 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title><%= [@page_title, Sugar.config.forum_name].compact.join(' - ') %></title>
 
-  <%# Stylesheet %>
   <%= stylesheet_link_tag "application" %>
-  <% if current_user? && current_user.stylesheet_url? %>
-    <%= stylesheet_link_tag current_user.stylesheet_url %>
-  <% else %>
-    <%= stylesheet_link_tag @theme.stylesheet_path %>
-  <% end %>
-
+  <%= stylesheet_link_tag "b3s/screen" %>
   <%= javascript_include_tag "application" %>
 
   <%= csrf_meta_tag %>
@@ -38,12 +32,8 @@
     <script src="//maps.google.com/maps/api/js?sensor=false"></script>
   <% end %>
 
-  <% if @theme.icon? %>
-    <link rel="icon" type="image/gif" href="<%= image_path @theme.icon_path %>">
-  <% end %>
- <% if @theme.mobile_icon? %>
-    <link rel="<%= @theme.mobile_icon_precomposed? ? 'apple-touch-icon-precomposed' : 'apple-touch-icon'%>" href="<%= image_path @theme.mobile_icon_path %>" />
-  <% end %>
+  <link rel="icon" type="image/gif" href="<%= image_path 'b3s/favicon.gif' %>">
+  <link rel="apple-touch-icon-precomposed" href="<%= image_path 'b3s/apple-touch-icon.png' %>">
 </head>
 <body class="<%= body_classes %>">
 

@@ -125,12 +125,6 @@ describe User do
     specify { user.admin_labels.should == [] }
   end
 
-  describe "#theme" do
-    before { Sugar.config.default_theme = "default" }
-    specify { user.theme.should == "default" }
-    specify { create(:user, theme: "mytheme").theme.should == "mytheme" }
-  end
-
   describe "#mark_active!" do
     before { user.mark_active! }
 
