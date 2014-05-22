@@ -150,12 +150,6 @@ describe User do
     end
   end
 
-  describe "#mobile_theme" do
-    before { Sugar.config.default_mobile_theme = "default_mobile" }
-    specify { user.mobile_theme.should == "default_mobile" }
-    specify { create(:user, mobile_theme: "mytheme_mobile").mobile_theme.should == "mytheme_mobile" }
-  end
-
   describe "#gamertag_avatar_url" do
     specify { user.gamertag_avatar_url.should be_nil }
     specify { create(:user, gamertag: 'my gamertag')

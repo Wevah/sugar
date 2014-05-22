@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   requires_authentication
   requires_moderator except: [:index, :show]
 
-  respond_to :html, :mobile, :xml, :json
+  respond_to :html, :xml, :json
 
   before_action :load_categories, only: [:index]
   before_action :load_category,   only: [:show, :edit, :update, :destroy]
@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
 
   def show
     respond_with(@category) do |format|
-      format.any(:html, :mobile) do
+      format.html do
         @discussions = @category.discussions.viewable_by(current_user).page(params[:page]).for_view
         respond_with_exchanges(@discussions)
       end
@@ -36,10 +36,10 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     respond_with(@category) do |format|
       if @category.save
-        format.any(:html, :mobile) { successful_update("The <em>#{@category.name}</em> category was created") }
+        format.html { successful_update("The <em>#{@category.name}</em> category was created") }
       else
         flash.now[:notice] = "Couldn't save your category, did you fill in all required fields?"
-        format.any(:html, :mobile) { render action: :new }
+        format.html { render action: :new }
       end
     end
   end
@@ -47,10 +47,10 @@ class CategoriesController < ApplicationController
   def update
     respond_with(@category) do |format|
       if @category.update_attributes(category_params)
-        format.any(:html, :mobile) { successful_update("The <em>#{@category.name}</em> category was saved") }
+        format.html { successful_update("The <em>#{@category.name}</em> category was saved") }
       else
         flash.now[:notice] = "Couldn't save your category, did you fill in all required fields?"
-        format.any(:html, :mobile) { render action: :edit }
+        format.html { render action: :edit }
       end
     end
   end
