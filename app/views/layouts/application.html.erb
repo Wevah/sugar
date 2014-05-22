@@ -41,6 +41,9 @@
   <% if @theme.icon? %>
     <link rel="icon" type="image/gif" href="<%= image_path @theme.icon_path %>">
   <% end %>
+ <% if @theme.mobile_icon? %>
+    <link rel="<%= @theme.mobile_icon_precomposed? ? 'apple-touch-icon-precomposed' : 'apple-touch-icon'%>" href="<%= image_path @theme.mobile_icon_path %>" />
+  <% end %>
 </head>
 <body class="<%= body_classes %>">
 
@@ -135,11 +138,6 @@
     <%# Main content %>
     <div id="content">
       <%= yield %>
-      <% if mobile_user_agent? %>
-        <div class="mobile_link">
-          <p><%= link_to "mobile version", mobile_format: 'mobile' %></p>
-        </div>
-      <% end %>
     </div>
   </div>
 
