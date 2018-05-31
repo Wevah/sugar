@@ -190,7 +190,7 @@
     <% end %>
     <% if @user.last_fm? %>
       <strong>LastFM</strong>:
-      <%= link_to @user.last_fm, "http://www.last.fm/user/#{@user.last_fm}" %>
+      <%= link_to @user.last_fm, "https://www.last.fm/user/#{@user.last_fm}" %>
       <br>
     <% end %>
   </p>
@@ -226,7 +226,7 @@
       <% end %>
       <% if @user.steam? %>
         <strong>Steam ID:</strong>
-        <a href="http://steamcommunity.com/id/<%= @user.steam %>">
+        <a href="https://steamcommunity.com/id/<%= @user.steam %>">
           <%= @user.steam %>
         </a>
         <br />
@@ -234,6 +234,9 @@
       <% if @user.battlenet? %>
         <strong>Battle.net:</strong>
         <%= @user.battlenet %>
+          <% replacedBnet = h(@user.battlenet.sub('#', '-')) %>
+            [<a href="https://playoverwatch.com/en-us/career/pc/<%= replacedBnet %>">OW</a>]
+            [<a href="https://us.diablo3.com/en/profile/<%= replacedBnet %>/">D3</a>] 
         <br />
       <% end %>
     </div>

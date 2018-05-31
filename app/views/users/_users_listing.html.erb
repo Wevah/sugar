@@ -80,11 +80,11 @@
             user.instagram
           when :last_fm
             link_to(user.last_fm,
-                    "http://www.last.fm/user/#{user.last_fm}") if user.last_fm?
+                    "https://www.last.fm/user/#{user.last_fm}") if user.last_fm?
           when :flickr
             link_to(
               user.flickr,
-              "http://www.flickr.com/photos/#{user.flickr}"
+              "https://www.flickr.com/photos/#{user.flickr}"
             ) if user.flickr?
           when :gamertag
             link_to(
@@ -107,9 +107,13 @@
             user.nintendo_switch if user.nintendo_switch?
           when :steam
             link_to(user.steam,
-                    "http://steamcommunity.com/id/#{user.steam}") if user.steam?
+                    "https://steamcommunity.com/id/#{user.steam}") if user.steam?
           when :battlenet
-            user.battlenet if user.battlenet?
+            if user.battlenet?
+              replacedBnet = h(user.battlenet.sub('#', '-'))
+              h(user.battlenet) + ' [' + link_to('OW', "https://playoverwatch.com/en-us/career/pc/#{replacedBnet}") +
+                  '] [' + link_to('D3', "https://us.diablo3.com/en/profile/#{replacedBnet}/") + ']'
+            end
           else
             "#{column} not defined"
           end
